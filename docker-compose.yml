@@ -1,0 +1,59 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: api-financas-postgres
+    restart: unless-stopped
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_DB: bd-api-financas
+      POSTGRES_USER: coti
+      POSTGRES_PASSWORD: coti
+    volumes:
+      - api-financas-postgres-data:/var/lib/postgresql/data
+    networks:
+      - api-financas-network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: api-financas-pgadmin
+    restart: unless-stopped
+    ports:
+      - "5056:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: coti@email.com
+      PGADMIN_DEFAULT_PASSWORD: Coti@2026
+    volumes:
+      - api-financas-pgadmin-data:/var/lib/pgadmin
+    networks:
+      - api-financas-network
+    depends_on:
+      - postgres
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: api-financas-rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: coti
+      RABBITMQ_DEFAULT_PASS: coti
+    volumes:
+      - api-financas-rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - api-financas-network
+
+volumes:
+  api-financas-postgres-data:
+    name: api-financas-postgres-data
+  api-financas-pgadmin-data:
+    name: api-financas-pgadmin-data
+  api-financas-rabbitmq-data:
+    name: api-financas-rabbitmq-data
+
+networks:
+  api-financas-network:
+    name: api-financas-network
+    driver: bridge
