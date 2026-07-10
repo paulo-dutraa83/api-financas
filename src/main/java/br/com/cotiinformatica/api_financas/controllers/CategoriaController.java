@@ -65,4 +65,27 @@ public class CategoriaController {
         }
     }
 
+    @GetMapping("consultar")
+    public ResponseEntity<?> consultar() {
+
+         var response = categoriaService.consultar();
+
+         //HTTP 200 (OK)
+         return ResponseEntity.status(200).body(response);
+    }
+
+    @GetMapping("obter/{id}")
+    public ResponseEntity<?> obterPorId(@PathVariable UUID id) {
+        try {
+            var response = categoriaService.obterPorId(id);
+
+            return ResponseEntity.status(200).body(response);
+        } catch(RegistroNaoEncontradoException e) {
+            //HTTP 404 (NOT FOUND)
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+
+    }
+
+
 }
