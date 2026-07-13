@@ -25,8 +25,8 @@ public class CategoriaController {
 
             //HTTP 201 (CREATED)
             return ResponseEntity.status(201).body(response);
-        }
-        catch(ValidacaoException e) {
+
+        } catch(ValidacaoException e) {
 
             //HTTP 400 (BAD REQUEST)
             return ResponseEntity.status(400).body(e.getMessage());
@@ -41,8 +41,8 @@ public class CategoriaController {
 
             //HTTP 200 (OK)
             return ResponseEntity.status(200).body(response);
-        }
-        catch(RegistroNaoEncontradoException e) {
+
+        } catch(RegistroNaoEncontradoException e) {
 
             //HTTP 404 (NOT FOUND)
             return ResponseEntity.status(404).body(e.getMessage());
@@ -57,8 +57,8 @@ public class CategoriaController {
 
             //HTTP 200 (OK)
             return ResponseEntity.status(200).body(response);
-        }
-        catch(RegistroNaoEncontradoException e) {
+
+        } catch(RegistroNaoEncontradoException e) {
 
             //HTTP 404 (NOT FOUND)
             return ResponseEntity.status(404).body(e.getMessage());
@@ -80,6 +80,7 @@ public class CategoriaController {
             var response = categoriaService.obterPorId(id);
 
             return ResponseEntity.status(200).body(response);
+
         } catch(RegistroNaoEncontradoException e) {
             //HTTP 404 (NOT FOUND)
             return ResponseEntity.status(404).body(e.getMessage());
