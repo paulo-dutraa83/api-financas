@@ -1,6 +1,7 @@
 package br.com.cotiinformatica.api_financas.repositories;
 
 import br.com.cotiinformatica.api_financas.entities.Movimentacao;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,7 +25,7 @@ public interface MovimentacaoRepository extends JpaRepository<Movimentacao, UUID
         FROM Movimentacao m
         WHERE m.data BETWEEN :pDataInicio AND :pDataFim
     """)
-    List<Movimentacao> findByData(
+    Page<Movimentacao> findByData(
             @Param("pDataInicio") LocalDate dataInicio,
             @Param("pDataFim")LocalDate dataFim,
             Pageable paginacao
