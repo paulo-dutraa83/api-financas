@@ -16,5 +16,12 @@ spring:
       hibernate:
         formal_sql: true
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: coti
+    password: coti
+    virtual-host: /
+
 server:
   port: 8083
